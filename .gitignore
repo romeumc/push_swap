@@ -1,0 +1,10 @@
+.DS?Store
+
+# Objects
+*.o
+
+# Libraries
+*.a
+
+# Executables
+*.out
