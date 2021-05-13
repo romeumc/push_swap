@@ -6,7 +6,7 @@
 #    By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/13 16:35:42 by rmartins          #+#    #+#              #
-#    Updated: 2021/05/13 17:26:12 by rmartins         ###   ########.fr        #
+#    Updated: 2021/05/13 18:23:02 by rmartins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,27 +26,19 @@ SRC = main.c
 
 all: $(NAME)
 
-printcompile:
-	@echo $(ANSI_B_BGREEN) "compile push_swap objects" $(ANSI_RESET)$(ANSI_F_BBLACK)
-	@echo $(ANSI_RESET)
-
-compile_libft:
+$(NAME): $(OBJ)
 	@echo $(ANSI_B_BGREEN) "compile libft" $(ANSI_RESET)$(ANSI_F_BBLACK)
 	$(MAKE) all -C libft
-	@echo $(ANSI_RESET)
-
-compile_executable:
+	@echo $(ANSI_RESET) ""
 	@echo $(ANSI_B_BGREEN) "compile executable" $(ANSI_RESET)$(ANSI_F_BBLACK)
 	gcc $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
-	@echo $(ANSI_RESET)
-
-
-$(NAME): compile_libft printcompile $(OBJ) compile_executable
+	@echo $(ANSI_RESET) ""
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(addprefix inc/,$(HEADER))
+	@echo $(ANSI_B_BGREEN) "compile push_swap objects" $(ANSI_RESET)$(ANSI_F_BBLACK)
 	mkdir -p $(dir $@)
 	gcc $(CFLAGS) -Iinc -c $< -o $@
-
+	@echo $(ANSI_RESET)
 
 clean:
 	@echo $(ANSI_B_RED) "clean" $(ANSI_RESET)$(ANSI_F_BRED)
@@ -101,4 +93,4 @@ runs: all
 	gcc $(CFLAGS) -fsanitize=address $(OBJ) $(LIBFT) -o push_swaps
 	./push_swaps $(LIST_INTEGER)
 
-LIST_INTEGER = "2 6 8 9 3 1a"
+LIST_INTEGER = "2 6 8 9 3 1"
