@@ -1,25 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 17:22:08 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/14 15:12:07 by rmartins         ###   ########.fr       */
+/*   Created: 2021/05/14 12:30:28 by rmartins          #+#    #+#             */
+/*   Updated: 2021/05/14 14:06:42 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include "../libft/libft.h"
-# include "ft_ansi.h"
+void	free_list(t_list *elem)
+{
+	t_list		*temp;
 
-void	free_list(t_list *elem);
-void	print_list(t_list *list);
-int		validate_args(int argc, char **argv);
+	while (elem)
+	{
+		temp = elem->next;
+		free(elem);
+		elem = temp;
+	}
+}
 
-#endif
+static void	print_element(char *content)
+{
+	int		len;
+
+	len = 0;
+	while (content[len])
+		len++;
+	write(1, content, len);
+	write(1, "\n", 1);
+}
+
+void	print_list(t_list *list)
+{
+	while (list)
+	{
+		print_element(list->content);
+		list = list->next;
+	}
+}
