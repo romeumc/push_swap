@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 17:22:08 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/14 15:12:07 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/14 15:56:10 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include "../libft/libft.h"
 # include "ft_ansi.h"
 
+t_list	*load_list(int argc, char **argv);
 void	free_list(t_list *elem);
 void	print_list(t_list *list);
 int		validate_args(int argc, char **argv);
-
 #endif

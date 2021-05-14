@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:10:58 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/14 15:40:29 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/14 15:52:31 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	validate_args(int argc, char **argv)
 	int	result;
 
 	i = 1;
-	if (argc == 2 && ft_isnumber(argv[i]))
+	if (argc == 2 && ft_isnumber(argv[i]) == EXIT_SUCCESS)
 		return (1);
 	else
 	{
