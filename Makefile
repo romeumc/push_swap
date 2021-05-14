@@ -6,7 +6,7 @@
 #    By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/13 16:35:42 by rmartins          #+#    #+#              #
-#    Updated: 2021/05/14 15:43:10 by rmartins         ###   ########.fr        #
+#    Updated: 2021/05/14 17:58:17 by rmartins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ HEADER = ft_ansi.h
 
 SRC = main.c \
 	list_utils.c \
-	validate_args.c
+	validate_args.c \
+	arg_errors.c
 
 
 all: $(NAME)

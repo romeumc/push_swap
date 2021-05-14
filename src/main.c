@@ -6,45 +6,48 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 16:09:12 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/14 16:04:51 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/14 18:00:23 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	display_error(char *title, char *description)
+int	*load_stack(int argc, char **argv)
 {
-	write(1, ANSI_B_BRED, 8);
-	write(1, " ", 1);
-	write(1, title, ft_strlen(title));
-	write(1, " \n", 2);
-	write(1, ANSI_RESET, 5);
-	write(1, description, ft_strlen(description));
+	int	i;
+	int	j;
+	int	*stack;
+
+	i = 0;
+	j = argc - 1;
+	stack = malloc(sizeof(int) * j);
+	while (i < argc - 1)
+	{
+		stack[i] = ft_atoi(argv[j]);
+		i++;
+		j--;
+	}
+	return (stack);
 }
 
-static void	check_arg_error(int valid_list)
+void	print_stack(int *stack, int size)
 {
-	if (valid_list == 1)
+	int	i;
+
+	i = 0;
+	while (i < size)
 	{
-		display_error("Only one number", "List already sorted");
-		exit (EXIT_SUCCESS);
-	}
-	else if (valid_list == 2)
-	{
-		display_error("Error in list", "Found non integer argument");
-		exit (EXIT_FAILURE);
-	}
-	else if (valid_list == 3)
-	{
-		display_error("Error in list", "Found duplicate number");
-		exit (EXIT_FAILURE);
+		printf ("arg[%d]:%d\n", i, stack[i]);
+		i++;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	t_list	*list;
+	//t_list	*list;
 	int		valid_list;
+	int		*stack_a;
+	int		*stack_b;
 
 	if (argc < 2)
 	{
@@ -55,10 +58,13 @@ int	main(int argc, char **argv)
 	{
 		valid_list = validate_args(argc, argv);
 		check_arg_error(valid_list);
-		list = load_list(argc, argv);
+		stack_a = load_stack(argc, argv);
+		print_stack(stack_a, argc - 1);
+		//list = load_list(argc, argv);
 	}
-	printf("list size:%d\n", ft_lstsize(list));
-	printf("argc: %d", argc);
-	print_list(list);
-	free_list(list);
+	// printf("list size:%d\n", ft_lstsize(list));
+	//print_list(list);
+	//free_list(list);
+	(void)stack_b;
+	free(stack_a);
 }

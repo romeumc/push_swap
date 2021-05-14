@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 12:30:28 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/14 15:55:54 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/14 16:18:46 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ t_list	*load_list(int argc, char **argv)
 		}
 		i++;
 	}
+	printf("arg[%d]: %s\n", i, argv[i]);
 	return (list);
 }
