@@ -6,7 +6,7 @@
 #    By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/13 16:35:42 by rmartins          #+#    #+#              #
-#    Updated: 2021/05/14 17:58:17 by rmartins         ###   ########.fr        #
+#    Updated: 2021/05/25 00:01:06 by rmartins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ HEADER = ft_ansi.h
 SRC = main.c \
 	list_utils.c \
 	validate_args.c \
-	arg_errors.c
+	arg_errors.c \
+	sort_instructions.c
 
 
 all: $(NAME)
@@ -96,4 +97,5 @@ runs: all
 	gcc $(CFLAGS) -fsanitize=address $(OBJ) $(LIBFT) -o push_swaps
 	./push_swaps $(LIST_INTEGER)
 
-LIST_INTEGER = 2 6 20 -2 7 1
+LIST_INTEGER = 2 6 20 -2 7 1 5 15 25
+# LIST_INTEGER = 2 6 20

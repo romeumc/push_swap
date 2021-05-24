@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:10:58 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/14 15:52:31 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/24 21:23:31 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	ft_isnumber(char *str)
 		i++;
 		flag = EXIT_SUCCESS;
 	}
+	if (ft_atoll(str) > INT_MAX || ft_atoll(str) < INT_MIN)
+		flag = EXIT_FAILURE;
 	return (flag);
 }
 

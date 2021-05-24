@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 00:21:27 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/24 21:05:43 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/24 21:19:39 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	check_edge_case(long long number)
-{
-	if (number >= 9223372036854775807)
-		return (-1);
-	if (number <= -9223372036854775807 || number > 2147483647)
-		return (0);
-	if (number < -2147483648)
-		return (-1);
-	else
-		return (number);
-}
-
-int	ft_atoi(const char *nptr)
+long long	ft_atoll(const char *nptr)
 {
 	int			i;
 	int			signal;
@@ -45,5 +33,5 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	number = number * signal;
-	return ((int)check_edge_case(number));
+	return (number);
 }

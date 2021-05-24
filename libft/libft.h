@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 21:30:52 by rmartins          #+#    #+#             */
-/*   Updated: 2021/04/12 00:50:59 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/24 21:14:51 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ unsigned long long	ft_iterative_power_ll(unsigned long long nb, int power);
 char				*ft_is_all_digit(char *str);
 void				ft_free_array_array(char **str);
 int					ft_split_count(char **str);
+long long			ft_atoll(const char *nptr);
 
 #endif

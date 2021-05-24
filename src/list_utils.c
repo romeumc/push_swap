@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 12:30:28 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/14 16:18:46 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/24 23:24:49 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_list(t_list *elem)
 {
-	t_list		*temp;
+	t_list	*temp;
 
 	while (elem)
 	{
@@ -26,13 +26,13 @@ void	free_list(t_list *elem)
 
 static void	print_element(char *content)
 {
-	int		len;
+	int	len;
 
 	len = 0;
 	while (content[len])
 		len++;
 	write(1, content, len);
-	write(1, "\n", 1);
+	write(1, " ", 1);
 }
 
 void	print_list(t_list *list)
@@ -60,10 +60,10 @@ t_list	*load_list(int argc, char **argv)
 		else
 		{
 			temp = ft_lstnew(argv[i]);
-			ft_lstadd_front(&list, temp);
+			ft_lstadd_back(&list, temp);
 		}
 		i++;
 	}
-	printf("arg[%d]: %s\n", i, argv[i]);
+	//printf("arg[%d]: %s\n", i, argv[i]);
 	return (list);
 }
