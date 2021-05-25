@@ -6,7 +6,7 @@
 #    By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/13 16:35:42 by rmartins          #+#    #+#              #
-#    Updated: 2021/05/25 00:01:06 by rmartins         ###   ########.fr        #
+#    Updated: 2021/05/25 02:02:15 by rmartins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ SRC = main.c \
 	list_utils.c \
 	validate_args.c \
 	arg_errors.c \
-	sort_instructions.c
+	sort_instructions.c \
+	check_sorted.c \
+	sort_algorithm.c
 
 
 all: $(NAME)
@@ -98,4 +100,5 @@ runs: all
 	./push_swaps $(LIST_INTEGER)
 
 LIST_INTEGER = 2 6 20 -2 7 1 5 15 25
-# LIST_INTEGER = 2 6 20
+LIST_INTEGER = 5 4 3 2
+# LIST_INTEGER = 1 2 3 4

@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 17:22:08 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/25 00:02:24 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/25 01:57:26 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,13 @@ void	push_list(t_list **src, t_list **dest);
 void	rotate_list(t_list **list);
 void	rev_rotate_list(t_list **list);
 
-//void	display_error(char *title, char *description);
+int		check_sorted(t_list *list, int argc);
+int		check_rev_sorted(t_list *list, int argc);
+void	sort_algorithm(t_list *list_a, t_list *list_b, int argc);
+
+void	display_error(char *title, char *description);
 void	print_error(void);
+
+void	print_lists(t_list *list_a, t_list *list_b);
 
 #endif

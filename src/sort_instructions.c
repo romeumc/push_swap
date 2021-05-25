@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 22:39:05 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/25 00:09:43 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/25 00:13:37 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,12 @@ void	push_list(t_list **src, t_list **dest)
 		first_node->next = NULL;
 		ft_lstadd_front(dest, first_node);
 	}
-	//return (list);
 }
 
 void	rotate_list(t_list **list)
 {
 	t_list	*first_node;
-	
+
 	if (ft_lstsize(*list) > 1)
 	{
 		first_node = *list;

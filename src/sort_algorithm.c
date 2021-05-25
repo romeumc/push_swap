@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array_utils.c                                      :+:      :+:    :+:   */
+/*   sort_algorithm.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/24 21:49:00 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/24 21:49:01 by rmartins         ###   ########.fr       */
+/*   Created: 2021/05/25 01:16:08 by rmartins          #+#    #+#             */
+/*   Updated: 2021/05/25 02:07:37 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	*load_stack(int argc, char **argv)
-{
-	int	i;
-	int	j;
-	int	*stack;
+#include "push_swap.h"
 
-	i = 0;
-	j = argc - 1;
-	stack = malloc(sizeof(int) * j);
-	while (i < argc - 1)
+void	do_rev_sort(t_list **list_a, int list_size)
+{
+	while (list_size > 0)
 	{
-		stack[i] = ft_atoi(argv[j]);
-		i++;
-		j--;
+		ft_putstr("ra\n");
+		rotate_list(list_a);
+		print_list(*list_a);
+		list_size--;
 	}
-	return (stack);
+
 }
 
-void	print_stack(int *stack, int size)
+void	sort_algorithm(t_list *list_a, t_list *list_b, int argc)
 {
-	int	i;
-
-	i = 0;
-	size--;
-	while (i < size)
+	if (check_rev_sorted(list_a, argc) == EXIT_SUCCESS)
 	{
-		printf ("arg[%d]:%d\n", i, stack[i]);
-		i++;
+		do_rev_sort(&list_a, argc);
+		print_lists(list_a, list_b);
 	}
 }
