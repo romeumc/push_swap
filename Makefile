@@ -6,7 +6,7 @@
 #    By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/13 16:35:42 by rmartins          #+#    #+#              #
-#    Updated: 2021/05/25 02:02:15 by rmartins         ###   ########.fr        #
+#    Updated: 2021/05/28 22:31:21 by rmartins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ SRC = main.c \
 	list_utils.c \
 	validate_args.c \
 	arg_errors.c \
+	print_list.c \
 	sort_instructions.c \
+	exec_instructions.c \
 	check_sorted.c \
 	sort_algorithm.c
 

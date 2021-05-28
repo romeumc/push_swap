@@ -6,57 +6,59 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 16:09:12 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/25 02:01:14 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/28 23:58:17 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-
-void	print_lists(t_list *list_a, t_list *list_b)
+void	tests(t_list **list_a, t_list **list_b, int argc)
 {
-	write(1, ANSI_F_BRED, 8);
-	write(1, " list_a ", 8);
-	write(1, ANSI_RESET, 5);
-	print_list(list_a);
-	write(1, "\t\t", 2);
-	write(1, ANSI_F_BRED, 8);
-	write(1, " list_b ", 8);
-	write(1, ANSI_RESET, 5);
-	print_list(list_b);
+	printf(ANSI_F_CYAN"list_a size:%d"ANSI_RESET"\n", ft_lstsize(*list_a));
+	printf("MIN:%d \t MAX:%d\n", get_min_list(*list_a), get_max_list(*list_a));
+	print_lists(list_a, list_b, "INIT");
+	swap_list(list_a);
+	print_lists(list_a, list_b, "sa");
+	push_list(list_a, list_b);
+	print_lists(list_a, list_b, "pb");
+	push_list(list_a, list_b);
+	print_lists(list_a, list_b, "pb");
+	push_list(list_a, list_b);
+	print_lists(list_a, list_b, "pb");
+	swap_list(list_b);
+	print_lists(list_a, list_b, "sb");
+	rotate_list(list_b);
+	print_lists(list_a, list_b, "rb");
+	rotate_list(list_a);
+	print_lists(list_a, list_b, "ra");
+	rev_rotate_list(list_b);
+	print_lists(list_a, list_b, "rrb");
+	rev_rotate_list(list_a);
+	print_lists(list_a, list_b, "rra");
+	rev_rotate_list(list_b);
+	print_lists(list_a, list_b, "rrb");
+	rev_rotate_list(list_a);
+	print_lists(list_a, list_b, "rra");
+	printf(ANSI_F_GREEN"sorted list (0:sorted):%d"ANSI_RESET"\n",
+		check_sorted(*list_a, argc));
 }
 
-void	tests(t_list *list_a, t_list *list_b, int argc)
+void	do_sort(t_list **list_a, t_list **list_b, int argc)
 {
-	printf(ANSI_F_CYAN"list_a size:%d"ANSI_RESET"\n", ft_lstsize(list_a));
-	print_lists(list_a, list_b);
-	printf(ANSI_F_RED"swap a"ANSI_RESET"\n");
-	swap_list(&list_a);
-	print_lists(list_a, list_b);
-	printf(ANSI_F_RED"push a"ANSI_RESET"\n");
-	push_list(&list_a, &list_b);
-	push_list(&list_a, &list_b);
-	push_list(&list_a, &list_b);
-	push_list(&list_a, &list_b);
-	print_lists(list_a, list_b);
-	printf(ANSI_F_RED"swap b"ANSI_RESET"\n");
-	swap_list(&list_b);
-	print_lists(list_a, list_b);
-	printf(ANSI_F_RED"rotate ab"ANSI_RESET"\n");
-	rotate_list(&list_b);
-	rotate_list(&list_a);
-	print_lists(list_a, list_b);
-	printf(ANSI_F_RED"rev rotate ab"ANSI_RESET"\n");
-	rev_rotate_list(&list_b);
-	rev_rotate_list(&list_a);
-	print_lists(list_a, list_b);
-	printf(ANSI_F_RED"rev rotate ab"ANSI_RESET"\n");
-	rev_rotate_list(&list_b);
-	rev_rotate_list(&list_a);
-	print_lists(list_a, list_b);
-	printf(ANSI_F_GREEN"sorted list (0:sorted):%d"ANSI_RESET"\n",
-		check_sorted(list_a, argc));
+	t_util	s;
+
+	if (argc <= 4)
+	{
+		//printf("lista <= 3");
+		sort_3(list_a, &s);
+	}
+	else if (argc <= 6)
+	{
+		sort_5(list_a, list_b, &s);
+	}
+	else
+		sort_algorithm(list_a, list_b, argc);
+
 }
 
 int	main(int argc, char **argv)
@@ -76,14 +78,15 @@ int	main(int argc, char **argv)
 		list_a = load_list(argc, argv);
 		list_b = NULL;
 	}
-	//tests(list_a, list_b, argc);
-	print_lists(list_a, list_b);
-	printf(ANSI_F_GREEN"sorted list (0:sorted):%d"ANSI_RESET"\n", check_sorted(list_a, argc));
+	//tests(&list_a, &list_b, argc);
 	if (check_sorted(list_a, argc) != EXIT_SUCCESS)
 	{
-		printf("ORDENAR\n");
-		sort_algorithm(list_a, list_b, argc);
+		print_lists(&list_a, &list_b, "INIT");
+		do_sort(&list_a, &list_b, argc);
+		print_lists(&list_a, &list_b, "END");
+		print_sorted(list_a, argc);
 	}
+	//printf(ANSI_F_GREEN"sorted list (0:sorted):%d"ANSI_RESET"\n", check_sorted(list_a, argc));
 	free_list(list_a);
 	free_list(list_b);
 }
