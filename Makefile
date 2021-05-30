@@ -6,7 +6,7 @@
 #    By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/13 16:35:42 by rmartins          #+#    #+#              #
-#    Updated: 2021/05/28 22:31:21 by rmartins         ###   ########.fr        #
+#    Updated: 2021/05/30 01:45:45 by rmartins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,14 @@ OBJ_DIR = obj
 SRC_DIR = src
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-HEADER = ft_ansi.h
+HEADER = ft_ansi.h \
+		push_swap.h
 
 SRC = main.c \
-	list_utils.c \
+	array_utils.c \
 	validate_args.c \
 	arg_errors.c \
-	print_list.c \
+	print_stack.c \
 	sort_instructions.c \
 	exec_instructions.c \
 	check_sorted.c \
@@ -101,6 +102,10 @@ runs: all
 	gcc $(CFLAGS) -fsanitize=address $(OBJ) $(LIBFT) -o push_swaps
 	./push_swaps $(LIST_INTEGER)
 
-LIST_INTEGER = 2 6 20 -2 7 1 5 15 25
-LIST_INTEGER = 5 4 3 2
-# LIST_INTEGER = 1 2 3 4
+# LIST_INTEGER = 2 6 20 -2 7 1 5 15 25
+LIST_INTEGER = 4 2 3 1 5
+LIST_INTEGER = 5 2 1 3 4
+LIST_INTEGER = 5 3 1 4 2
+
+
+# LIST_INTEGER = 1 5 2 4 3

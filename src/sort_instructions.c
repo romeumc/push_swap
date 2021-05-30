@@ -6,65 +6,79 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 22:39:05 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/25 00:13:37 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/29 22:22:22 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_list(t_list **list)
+void	swap_stack(t_stack *s)
 {
-	t_list	*first_node;
-	t_list	*second_node;
+	int	i;
+	int	aux;
 
-	if (ft_lstsize(*list) > 1)
+	if (s->size > 1)
 	{
-		first_node = *list;
-		second_node = first_node->next;
-		*list = second_node;
-		first_node->next = second_node->next;
-		second_node->next = first_node;
+		i = s->size - 1;
+		aux = s->stack[i];
+		s->stack[i] = s->stack[i - 1];
+		s->stack[i - 1] = aux;
+		update_stack(s, 0);
 	}
 }
 
-void	push_list(t_list **src, t_list **dest)
+void	push_stack(t_stack *src, t_stack *dest)
 {
-	t_list	*first_node;
+	int	i;
+	int	j;
 
-	if (ft_lstsize(*src) >= 1)
+	i = src->size - 1;
+	j = dest->size;
+	if (i >= 0)
 	{
-		first_node = *src;
-		*src = first_node->next;
-		first_node->next = NULL;
-		ft_lstadd_front(dest, first_node);
+		dest->stack[j] = src->stack[i];
+		dest->size++;
+		src->size--;
+		update_stack(src, 1);
+		update_stack(dest, 1);
 	}
 }
 
-void	rotate_list(t_list **list)
+void	rotate_stack(t_stack *s)
 {
-	t_list	*first_node;
+	int	i;
+	int	top;
 
-	if (ft_lstsize(*list) > 1)
+	i = s->size - 1;
+	if (s->size > 1)
 	{
-		first_node = *list;
-		*list = first_node->next;
-		first_node->next = NULL;
-		ft_lstadd_back(list, first_node);
+		top = s->stack[i];
+		i--;
+		while (i >= 0)
+		{
+			s->stack[i + 1] = s->stack[i];
+			i--;
+		}
+		s->stack[0] = top;
+		update_stack(s, 0);
 	}
 }
 
-void	rev_rotate_list(t_list **list)
+void	rev_rotate_stack(t_stack *s)
 {
-	t_list	*last_node;
-	t_list	*temp;
+	int	i;
+	int	bottom;
 
-	if (ft_lstsize(*list) > 1)
+	i = 0;
+	if (s->size > 1)
 	{
-		temp = *list;
-		while (temp->next->next != NULL)
-			temp = temp->next;
-		last_node = temp->next;
-		temp->next = NULL;
-		ft_lstadd_front(list, last_node);
+		bottom = s->stack[0];
+		while (i < s->size - 1)
+		{
+			s->stack[i] = s->stack[i + 1];
+			i++;
+		}
+		s->stack[s->size - 1] = bottom;
+		update_stack(s, 0);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 17:22:08 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/28 23:49:40 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/30 01:38:39 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,49 +19,49 @@
 # include "../libft/libft.h"
 # include "ft_ansi.h"
 
-typedef struct s_util
+typedef struct s_stack
 {
-	int	min;
-	int	max;
-	int	n1;
-	int	n2;
-	int	n3;
-	int	n4;
-	int nn;
-} t_util;
+	int		*stack;
+	int		size;
+	int		min;
+	int		min_pos;
+	int		max;
+	int		change_top;
+	int		change_bottom;
+	int		change_total;
+	int		diff_top;
+	int		diff_bottom;
+}	t_stack;
 
+void	load_stack(int argc, char **argv, t_stack *s);
+int		check_sorted(t_stack *s, int size);
+void	print_stacks(t_stack *a, t_stack *b, char *instruction);
+void	print_sorted(t_stack *s, int size);
 
-t_list	*load_list(int argc, char **argv);
-void	free_list(t_list *elem);
 int		validate_args(int argc, char **argv);
 void	check_arg_error(int valid_list);
 
-void	swap_list(t_list **list);
-void	push_list(t_list **src, t_list **dest);
-void	rotate_list(t_list **list);
-void	rev_rotate_list(t_list **list);
+void	swap_stack(t_stack *s);
+void	push_stack(t_stack *src, t_stack *dest);
+void	rotate_stack(t_stack *s);
+void	rev_rotate_stack(t_stack *s);
 
-void	exec_swap(t_list **list, char *instruction);
-void	exec_push(t_list **src, t_list **dest, char *instruction);
-void	exec_rotate(t_list **list, char *instruction);
-void	exec_rev_rotate(t_list **list, char *instruction);
+void	update_stack(t_stack *s, int flag);
+// void	get_min_value(t_stack *s);
+// void	get_max_value(t_stack *s);
+// int		detect_change_top(t_stack *s);
+// int		detect_change_bottom(t_stack *s);
 
-int		check_sorted(t_list *list, int argc);
-int		check_rev_sorted(t_list *list, int argc);
+void	exec_swap(t_stack *s, char *instruction);
+void	exec_push(t_stack *src, t_stack *dest, char *instruction);
+void	exec_rotate(t_stack *s, char *instruction);
+void	exec_rev_rotate(t_stack *s, char *instruction);
 
-void	sort_3(t_list **list, t_util *s);
-void	sort_5(t_list **list_a, t_list **list_b, t_util *s);
-void	sort_algorithm(t_list **list_a, t_list **list_b, int argc);
+void	sort_3(t_stack *s);
+void	sort_5(t_stack *a, t_stack *b, int argc);
+void	sort_algorithm(t_stack *a, t_stack *b, int argc);
 
 void	display_error(char *title, char *description);
 void	print_error(void);
-
-//void	print_list(t_list *list);
-void	print_sorted(t_list *list, int argc);
-void	print_lists(t_list **list_a, t_list **list_b, char *instruction);
-
-int		get_min_list(t_list *list);
-int		get_max_list(t_list *list);
-void	update_util(t_util *s, t_list **list);
 
 #endif

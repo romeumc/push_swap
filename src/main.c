@@ -6,66 +6,100 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 16:09:12 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/28 23:58:17 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/30 02:15:19 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	tests(t_list **list_a, t_list **list_b, int argc)
+void	tests(t_stack *a, t_stack *b, int argc)
 {
-	printf(ANSI_F_CYAN"list_a size:%d"ANSI_RESET"\n", ft_lstsize(*list_a));
-	printf("MIN:%d \t MAX:%d\n", get_min_list(*list_a), get_max_list(*list_a));
-	print_lists(list_a, list_b, "INIT");
-	swap_list(list_a);
-	print_lists(list_a, list_b, "sa");
-	push_list(list_a, list_b);
-	print_lists(list_a, list_b, "pb");
-	push_list(list_a, list_b);
-	print_lists(list_a, list_b, "pb");
-	push_list(list_a, list_b);
-	print_lists(list_a, list_b, "pb");
-	swap_list(list_b);
-	print_lists(list_a, list_b, "sb");
-	rotate_list(list_b);
-	print_lists(list_a, list_b, "rb");
-	rotate_list(list_a);
-	print_lists(list_a, list_b, "ra");
-	rev_rotate_list(list_b);
-	print_lists(list_a, list_b, "rrb");
-	rev_rotate_list(list_a);
-	print_lists(list_a, list_b, "rra");
-	rev_rotate_list(list_b);
-	print_lists(list_a, list_b, "rrb");
-	rev_rotate_list(list_a);
-	print_lists(list_a, list_b, "rra");
+	print_stacks(a, b, "init");
+	
+	rotate_stack(a);
+	print_stacks(a, b, "ra");
+
+	swap_stack(a);
+	print_stacks(a, b, "sa");
+	
+	push_stack(a, b);
+	print_stacks(a, b, "pb");
+	push_stack(a, b);
+	print_stacks(a, b, "pb");
+	push_stack(a, b);
+	print_stacks(a, b, "pb");
+	push_stack(a, b);
+	print_stacks(a, b, "pb");
+	push_stack(a, b);
+	print_stacks(a, b, "pb");
+	push_stack(a, b);
+	
+	push_stack(b, a);
+	print_stacks(a, b, "pa");
+	push_stack(b, a);
+	print_stacks(a, b, "pa");
+	push_stack(b, a);
+	print_stacks(a, b, "pa");
+	push_stack(b, a);
+	print_stacks(a, b, "pa");
+	push_stack(b, a);
+	print_stacks(a, b, "pa");
+	push_stack(b, a);
+	print_stacks(a, b, "pa");
+	push_stack(b, a);
+	print_stacks(a, b, "pa");
+
+	swap_stack(b);
+	print_stacks(a, b, "sb");
+	
+	rotate_stack(b);
+	print_stacks(a, b, "rb");
+	rotate_stack(b);
+	print_stacks(a, b, "rb");
+	rotate_stack(a);
+	print_stacks(a, b, "ra");
+	
+	rev_rotate_stack(a);
+	print_stacks(a, b, "rra");
+	rev_rotate_stack(a);
+	print_stacks(a, b, "rra");
+	rev_rotate_stack(a);
+	print_stacks(a, b, "rra");
+	rev_rotate_stack(b);
+	print_stacks(a, b, "rrb");
+	
 	printf(ANSI_F_GREEN"sorted list (0:sorted):%d"ANSI_RESET"\n",
-		check_sorted(*list_a, argc));
+		check_sorted(a, argc));
 }
 
-void	do_sort(t_list **list_a, t_list **list_b, int argc)
+void	do_sort(t_stack *a, t_stack *b, int argc)
 {
-	t_util	s;
+	// if (argc <= 4)
+	// {
+	// 	sort_3(a);
+	// }
+	// else if (argc <= 10)
+	// {
+		sort_5(a, b, argc);
+	// }
+	// else
+	// 	sort_algorithm(a, b, argc);
+}
 
-	if (argc <= 4)
-	{
-		//printf("lista <= 3");
-		sort_3(list_a, &s);
-	}
-	else if (argc <= 6)
-	{
-		sort_5(list_a, list_b, &s);
-	}
-	else
-		sort_algorithm(list_a, list_b, argc);
-
+void	init_stack(t_stack *s, int argc)
+{
+	s->size = 0;
+	s->stack = malloc(sizeof(int) * (argc - 1));
+	s->change_top = 0;
+	s->change_bottom = 0;
+	s->change_total = 0;
 }
 
 int	main(int argc, char **argv)
 {
 	int		valid_list;
-	t_list	*list_a;
-	t_list	*list_b;
+	t_stack	a;
+	t_stack	b;
 
 	if (argc < 2)
 	{
@@ -75,18 +109,23 @@ int	main(int argc, char **argv)
 	{
 		valid_list = validate_args(argc, argv);
 		check_arg_error(valid_list);
-		list_a = load_list(argc, argv);
-		list_b = NULL;
+		init_stack(&a, argc);
+		init_stack(&b, argc);
+		load_stack(argc, argv, &a);
 	}
-	//tests(&list_a, &list_b, argc);
-	if (check_sorted(list_a, argc) != EXIT_SUCCESS)
+	// tests(&a, &b, argc);
+	if (check_sorted(&a, argc - 1) == EXIT_FAILURE)
 	{
-		print_lists(&list_a, &list_b, "INIT");
-		do_sort(&list_a, &list_b, argc);
-		print_lists(&list_a, &list_b, "END");
-		print_sorted(list_a, argc);
+		print_stacks(&a, &b, "init");
+		do_sort(&a, &b, argc);
+		//print_stacks(&a, &b, "end");
+		//print_sorted(&a, argc - 1);
 	}
-	//printf(ANSI_F_GREEN"sorted list (0:sorted):%d"ANSI_RESET"\n", check_sorted(list_a, argc));
-	free_list(list_a);
-	free_list(list_b);
+	// else
+	// {
+	// 	print_stacks(&a, &b, "ok");
+	// 	print_sorted(&a, argc - 1);
+	// }
+	free(a.stack);
+	free(b.stack);
 }
