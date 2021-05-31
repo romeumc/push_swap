@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 21:49:00 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/31 14:57:54 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/31 20:35:18 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	get_min_max_avg(t_stack *s)
 	s->max = INT_MIN;
 	s->min = INT_MAX;
 	s->average = 0;
-	while (i < s->size)
+	while (i <= s->size)
 	{
 		if (s->stack[i] > s->max)
 			s->max = s->stack[i];
@@ -45,17 +45,17 @@ void	change_detect(t_stack *s)
 	s->change_total = 0;
 	if (s->size > 1)
 	{
-		while (i < s->size - 1)
+		while (i < s->size)
 		{
 			if (s->stack[i + 1] > s->stack[i])
 			{
-				if (first == 0 && i < s->size / 2)
+				if (first == 0)
 				{
 					s->change_bottom = i + 1;
 					first = 1;
 				}
 				s->change_total++;
-				s->change_top = s->size - i - 1;
+				s->change_top = s->size - i;
 			}
 			i++;
 		}
@@ -86,6 +86,6 @@ void	load_stack(int argc, char **argv, t_stack *s)
 		i++;
 		j--;
 	}
-	s->size = i;
+	s->size = i - 1;
 	update_stack(s);
 }

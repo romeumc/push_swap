@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 22:39:05 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/31 14:16:00 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/31 15:21:00 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	swap_stack(t_stack *s)
 	int	i;
 	int	aux;
 
-	if (s->size > 1)
+	if (s->size > 0)
 	{
-		i = s->size - 1;
+		i = s->size;
 		aux = s->stack[i];
 		s->stack[i] = s->stack[i - 1];
 		s->stack[i - 1] = aux;
@@ -32,11 +32,11 @@ void	push_stack(t_stack *src, t_stack *dest)
 	int	i;
 	int	j;
 
-	i = src->size - 1;
+	i = src->size;
 	j = dest->size;
 	if (i >= 0)
 	{
-		dest->stack[j] = src->stack[i];
+		dest->stack[j + 1] = src->stack[i];
 		dest->size++;
 		src->size--;
 		update_stack(src);
@@ -49,8 +49,8 @@ void	rotate_stack(t_stack *s)
 	int	i;
 	int	top;
 
-	i = s->size - 1;
-	if (s->size > 1)
+	i = s->size;
+	if (s->size > 0)
 	{
 		top = s->stack[i];
 		i--;
@@ -70,15 +70,15 @@ void	rev_rotate_stack(t_stack *s)
 	int	bottom;
 
 	i = 0;
-	if (s->size > 1)
+	if (s->size > 0)
 	{
 		bottom = s->stack[0];
-		while (i < s->size - 1)
+		while (i < s->size)
 		{
 			s->stack[i] = s->stack[i + 1];
 			i++;
 		}
-		s->stack[s->size - 1] = bottom;
+		s->stack[s->size] = bottom;
 		update_stack(s);
 	}
 }

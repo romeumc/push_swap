@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 17:22:08 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/31 14:35:43 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/31 16:28:43 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ typedef struct s_stack
 }	t_stack;
 
 void	load_stack(int argc, char **argv, t_stack *s);
-int		check_sorted(t_stack *s, int size);
+int		check_sorted(t_stack *s);
 void	print_stacks(t_stack *a, t_stack *b, char *instruction);
-void	print_sorted(t_stack *s, int size);
+void	print_sorted(t_stack *s);
 
 int		validate_args(int argc, char **argv);
 void	check_arg_error(int valid_list);
@@ -58,8 +58,8 @@ void	exec_push(t_stack *src, t_stack *dest, char *instruction);
 void	exec_rotate(t_stack *s, char *instruction);
 void	exec_rev_rotate(t_stack *s, char *instruction);
 
-void	sort_3(t_stack *s);
-void	sort_5(t_stack *a, t_stack *b, int argc);
+//void	sort_3(t_stack *s);
+void	sort_5(t_stack *a, t_stack *b);
 void	sort_algorithm(t_stack *a, t_stack *b, int argc);
 
 void	display_error(char *title, char *description);

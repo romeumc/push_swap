@@ -6,13 +6,13 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 16:09:12 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/31 12:53:21 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/31 16:24:05 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	tests(t_stack *a, t_stack *b, int argc)
+void	tests(t_stack *a, t_stack *b)
 {
 	print_stacks(a, b, "init");
 	
@@ -22,6 +22,12 @@ void	tests(t_stack *a, t_stack *b, int argc)
 	swap_stack(a);
 	print_stacks(a, b, "sa");
 	
+	push_stack(a, b);
+	print_stacks(a, b, "pb");
+	push_stack(a, b);
+	print_stacks(a, b, "pb");
+	push_stack(a, b);
+	print_stacks(a, b, "pb");
 	push_stack(a, b);
 	print_stacks(a, b, "pb");
 	push_stack(a, b);
@@ -69,10 +75,10 @@ void	tests(t_stack *a, t_stack *b, int argc)
 	print_stacks(a, b, "rrb");
 	
 	printf(ANSI_F_GREEN"sorted list (0:sorted):%d"ANSI_RESET"\n",
-		check_sorted(a, argc));
+		check_sorted(a));
 }
 
-void	do_sort(t_stack *a, t_stack *b, int argc)
+void	do_sort(t_stack *a, t_stack *b)
 {
 	// if (argc <= 4)
 	// {
@@ -80,7 +86,7 @@ void	do_sort(t_stack *a, t_stack *b, int argc)
 	// }
 	// else if (argc <= 10)
 	// {
-		sort_5(a, b, argc);
+		sort_5(a, b);
 	// }
 	// else
 	// 	sort_algorithm(a, b, argc);
@@ -88,7 +94,7 @@ void	do_sort(t_stack *a, t_stack *b, int argc)
 
 void	init_stack(t_stack *s, int argc)
 {
-	s->size = 0;
+	s->size = -1;
 	s->stack = malloc(sizeof(int) * (argc - 1));
 	s->change_top = 0;
 	s->change_bottom = 0;
@@ -113,19 +119,17 @@ int	main(int argc, char **argv)
 		init_stack(&b, argc);
 		load_stack(argc, argv, &a);
 	}
-	// tests(&a, &b, argc);
-	if (check_sorted(&a, argc - 1) == EXIT_FAILURE)
+	//tests(&a, &b);
+	if (check_sorted(&a) == EXIT_FAILURE)
 	{
 		print_stacks(&a, &b, "init");
-		do_sort(&a, &b, argc);
-		//print_stacks(&a, &b, "end");
-		//print_sorted(&a, argc - 1);
+		do_sort(&a, &b);
 	}
-	// else
-	// {
-	// 	print_stacks(&a, &b, "ok");
-	// 	print_sorted(&a, argc - 1);
-	// }
+	else
+	{
+		print_stacks(&a, &b, "OKKKKKKKKK");
+		print_sorted(&a);
+	}
 	free(a.stack);
 	free(b.stack);
 }
