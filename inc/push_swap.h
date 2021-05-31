@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 17:22:08 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/30 01:38:39 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/31 14:35:43 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_stack
 	int		min;
 	int		min_pos;
 	int		max;
+	double	average;
 	int		change_top;
 	int		change_bottom;
 	int		change_total;
@@ -46,7 +47,7 @@ void	push_stack(t_stack *src, t_stack *dest);
 void	rotate_stack(t_stack *s);
 void	rev_rotate_stack(t_stack *s);
 
-void	update_stack(t_stack *s, int flag);
+void	update_stack(t_stack *s);
 // void	get_min_value(t_stack *s);
 // void	get_max_value(t_stack *s);
 // int		detect_change_top(t_stack *s);

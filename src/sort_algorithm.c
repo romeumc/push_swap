@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 01:16:08 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/30 02:11:23 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/31 14:13:02 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,24 @@ void	sort_top1_bottom1(t_stack *a, t_stack *b)
 	}
 }
 
+void	treat_min_posisition(t_stack *a, t_stack *b)
+{
+	if ((a->min_pos) == (a->size - 1))
+	{
+		exec_push(a, b, "pb");
+		print_stacks(a, b, "pb min");
+	}
+	else if (a->min_pos == 0)
+	{
+		exec_rev_rotate(a, "rra");
+		print_stacks(a, b, "rra min");
+	}
+	else if ((a->min_pos) == (a->size - 2))
+	{
+		//if (a->stack[a->size - 1] == a->max)
+	}
+}
+
 void	sort_5(t_stack *a, t_stack *b, int argc)
 {
 	int	flag;
@@ -152,6 +170,7 @@ void	sort_5(t_stack *a, t_stack *b, int argc)
 	flag = EXIT_FAILURE;
 	while(flag == EXIT_FAILURE)
 	{
+		//treat_min_posisition(a, b);
 		if (a->stack[a->size -1] == a->min && b->stack[b->size -1] == b->max
 			&& check_sorted(a, a->size) == EXIT_SUCCESS)
 		{

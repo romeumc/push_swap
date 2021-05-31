@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 22:39:05 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/29 22:22:22 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/31 14:16:00 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	swap_stack(t_stack *s)
 		aux = s->stack[i];
 		s->stack[i] = s->stack[i - 1];
 		s->stack[i - 1] = aux;
-		update_stack(s, 0);
+		update_stack(s);
 	}
 }
 
@@ -39,8 +39,8 @@ void	push_stack(t_stack *src, t_stack *dest)
 		dest->stack[j] = src->stack[i];
 		dest->size++;
 		src->size--;
-		update_stack(src, 1);
-		update_stack(dest, 1);
+		update_stack(src);
+		update_stack(dest);
 	}
 }
 
@@ -60,7 +60,7 @@ void	rotate_stack(t_stack *s)
 			i--;
 		}
 		s->stack[0] = top;
-		update_stack(s, 0);
+		update_stack(s);
 	}
 }
 
@@ -79,6 +79,6 @@ void	rev_rotate_stack(t_stack *s)
 			i++;
 		}
 		s->stack[s->size - 1] = bottom;
-		update_stack(s, 0);
+		update_stack(s);
 	}
 }

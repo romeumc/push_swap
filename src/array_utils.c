@@ -6,41 +6,33 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 21:49:00 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/30 02:04:05 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/05/31 14:57:54 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	get_min_value(t_stack *s)
-{
-	int	i;
-
-	i = s->size - 1;
-	s->min = INT_MAX;
-	while (i >= 0)
-	{
-		if (s->stack[i] < s->min)
-		{
-			s->min = s->stack[i];
-			s->min_pos = i;
-		}
-		i--;
-	}
-}
-
-void	get_max_value(t_stack *s)
+void	get_min_max_avg(t_stack *s)
 {
 	int	i;
 
 	i = 0;
 	s->max = INT_MIN;
+	s->min = INT_MAX;
+	s->average = 0;
 	while (i < s->size)
 	{
 		if (s->stack[i] > s->max)
 			s->max = s->stack[i];
+		if (s->stack[i] < s->min)
+		{
+			s->min = s->stack[i];
+			s->min_pos = i;
+		}
+		s->average += s->stack[i];
 		i++;
 	}
+	s->average /= i;
 }
 
 void	change_detect(t_stack *s)
@@ -70,13 +62,9 @@ void	change_detect(t_stack *s)
 	}
 }
 
-void	update_stack(t_stack *s, int flag)
+void	update_stack(t_stack *s)
 {
-	if (flag == 1)
-	{
-		get_max_value(s);
-	}
-	get_min_value(s);
+	get_min_max_avg(s);
 	change_detect(s);
 	if (s->size > 2)
 	{
@@ -99,5 +87,5 @@ void	load_stack(int argc, char **argv, t_stack *s)
 		j--;
 	}
 	s->size = i;
-	update_stack(s, 1);
+	update_stack(s);
 }
