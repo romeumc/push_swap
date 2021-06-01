@@ -6,7 +6,7 @@
 #    By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/13 16:35:42 by rmartins          #+#    #+#              #
-#    Updated: 2021/06/01 00:51:57 by rmartins         ###   ########.fr        #
+#    Updated: 2021/06/01 03:41:35 by rmartins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,5 +109,10 @@ LIST_INTEGER = 5 2 1 3 4
 LIST_INTEGER = 5 3 1 4 2
 LIST_INTEGER = 3 4 10 7 2 8 9 1 6 5
 LIST_INTEGER = 8 2 6 9 5 10 1 7 3 4
+LIST_INTEGER = 5 6 9 1 3 8 4 10 7 2
+# LIST_INTEGER = 4 10 7 6 9 1 5 2 3 8
+# LIST_INTEGER = 9 7 6 2 4 3 8 1 10 5
+# LIST_INTEGER = 9 10 5 1 2 7 3 8 6 4
+
 
 # LIST_INTEGER = 1 5 2 4 3

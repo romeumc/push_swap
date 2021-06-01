@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:57:00 by rmartins          #+#    #+#             */
-/*   Updated: 2021/06/01 01:33:58 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/01 04:04:23 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	print_stacks(t_stack *a, t_stack *b, char *instruction)
 	
 	// printf(ANSI_F_BGREEN"top:%d bottom:%d total:%d"ANSI_RESET, a->change_top, a->change_bottom, a->change_total);
 	// printf(ANSI_F_CYAN" size:(%d) min:%d[%d] max:%d avg:%.2f"ANSI_RESET, a->size+1, a->min, a->min_pos, a->max, a->average);
+	// printf(" db:%d dt:%d", a->diff_bottom, a->diff_top);
 	// printf(ANSI_F_BMAGENTA" size:(%d) min:%d[%d] max:%d avg:%.2f"ANSI_RESET, b->size+1, b->min, b->min_pos, b->max, b->average);
 	
 	// printf("\n");

@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 01:16:08 by rmartins          #+#    #+#             */
-/*   Updated: 2021/06/01 01:27:44 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/01 04:01:01 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,31 @@ void	sort_3(t_stack *s, t_stack *b)
 // 	//(void)b;
 // }
 
+void	process_after_push(t_stack *a, t_stack *b)
+{
+	if (b->size > 0)
+	{
+		if (b->stack[b->size] < b->average)
+		{
+			// if (b->stack[b->size] == b->min)
+			// {
+				exec_rotate(b, "rb");
+				print_stacks(a, b, "rb process");
+			//}
+		}
+		else if (b->stack[b->size] < b->stack[b->size - 1] && a->stack[a->size] > a->stack[a->size - 1])
+		{
+			exec_swap(a, NULL);
+			exec_swap(b, "ss");
+			print_stacks(a, b, "ss process");
+		}
+		else if (b->stack[b->size] < b->stack[b->size - 1])
+		{
+			exec_swap(b, "sb");
+			print_stacks(a, b, "sb process");
+		}
+	}
+}
 
 void	sort_top1_bottom1(t_stack *a, t_stack *b)
 {	
@@ -131,52 +156,97 @@ void	sort_top1_bottom1(t_stack *a, t_stack *b)
 	{
 		if (a->stack[a->size] > a->average && a->stack[a->size - 1] > a->average)
 		{
-			exec_rotate(a, "ra");
-			print_stacks(a, b, "ra 11");
+			if (a->diff_bottom < a->diff_top)
+			{
+				exec_rotate(a, "ra");
+				print_stacks(a, b, "ra 11.t");
+			}
+			else
+			{
+				exec_swap(a, "sa");
+				print_stacks(a, b, "sa 11.1");
+			}
 		}
 		else
 		{
 			exec_swap(a, "sa");
-			print_stacks(a, b, "sa 11");
+			print_stacks(a, b, "sa 11.2");
 		}
 	}
 	else if (a->change_bottom == 1)
 	{
-		// if (a->stack[0] < a->stack[a->size])
-		// {
-		// 	exec_rev_rotate(a, "rra");
-		// 	print_stacks(a, b, "rra 11");
-		// }
-		// else
-		// {
+		if (a->stack[0] < a->stack[a->size])
+		{
+			exec_rev_rotate(a, "rra");
+			print_stacks(a, b, "rra 11.1");
+		}
+		// if (a->stack[a->size] <= a->average)
+		else
+		{
 			exec_push(a, b, "pb");
 			print_stacks(a, b, "pb 11");
-			/**********/
-				if (b->size > 0)
-				{
-					if (b->stack[b->size] == b->min_pos)
-					{
-						exec_rotate(b, "rb");
-						print_stacks(a, b, "rb 11");
-					}
-					else if (b->stack[b->size] < b->stack[b->size - 1] && a->stack[a->size] > a->stack[a->size - 1])
-					{
-						exec_swap(a, NULL);
-						exec_swap(b, "ss");
-						print_stacks(a, b, "ss 11");
-					}
-					else if (b->stack[b->size] < b->stack[b->size - 1])
-					{
-						exec_swap(b, "sb");
-						print_stacks(a, b, "sb 11");
-					}
-				}
-				/**********/
-		//}
+			/*****************/
+			process_after_push(a, b);
+			/*****************/
+		}
+		// else
+		// {
+		// 	exec_rev_rotate(a, "rra");
+		// 	print_stacks(a, b, "rra 11.2");
+		// }
 	}
 
 }
 
+void	process_top_changes(t_stack *a, t_stack *b)
+{
+	int	count;
+
+	count = a->change_top - 1;
+	// if (a->stack[a->size] < a->average && check_sorted(a) == EXIT_FAILURE)
+	// {
+		while (count > 0)
+		{
+			exec_push(a, b, "pb");
+			print_stacks(a, b, "pb -+ while");
+			/*****************/
+			process_after_push(a, b);
+			/*****************/
+			count--;
+		}
+	// }
+	// else
+	// {
+	// 	exec_rotate(a, "ra");
+	// 	print_stacks(a, b, "ra -+");
+	// }
+}
+
+
+void	process_bottom_changes(t_stack *a, t_stack *b)
+{
+	int	count;
+
+	count = a->change_bottom;
+	if (a->stack[a->size] < a->average && check_sorted(a) == EXIT_FAILURE)
+	{
+		exec_push(a, b, "pb");
+		print_stacks(a, b, "pb +- while");
+		
+		/*****************/
+		process_after_push(a, b);
+		/*****************/
+	}
+	else
+	{
+		while (count > 0)
+		{
+			exec_rev_rotate(a, "rra");
+			print_stacks(a, b, "rra +-");
+			count--;
+		}
+	}
+}
 
 void	sort_5(t_stack *a, t_stack *b)
 {
@@ -196,27 +266,9 @@ void	sort_5(t_stack *a, t_stack *b)
 		{
 			exec_push(b, a, "pa");
 			print_stacks(a, b, "pa");
-				/**********/
-				if (b->size > 0)
-				{
-					if (b->stack[b->size] == b->min)
-					{
-						exec_rotate(b, "rb");
-						print_stacks(a, b, "rb +-");
-					}
-					else if (b->stack[b->size] < b->stack[b->size - 1] && a->stack[a->size] > a->stack[a->size - 1])
-					{
-						exec_swap(a, NULL);
-						exec_swap(b, "ss");
-						print_stacks(a, b, "ss +-");
-					}
-					else if (b->stack[b->size] < b->stack[b->size - 1])
-					{
-						exec_swap(b, "sb");
-						print_stacks(a, b, "sb +-");
-					}
-				}
-				/**********/
+			/*****************/
+			process_after_push(a, b);
+			/*****************/
 		}
 		// SORT 3
 		else if (check_sorted(a) == EXIT_SUCCESS)
@@ -247,26 +299,9 @@ void	sort_5(t_stack *a, t_stack *b)
 		{
 			exec_push(a, b, "pb");
 			print_stacks(a, b, "pb min");
-				/**********/
-				if (b->size > 0)
-				{
-					if (b->stack[b->size] == b->min)
-					{
-						exec_rotate(b, "rb");
-						print_stacks(a, b, "rb min");
-					}
-					else if (b->stack[b->size] < b->stack[b->size - 1] && a->stack[a->size] > a->stack[a->size - 1])
-					{
-						exec_swap(b, "ss");
-						print_stacks(a, b, "ss min");
-					}
-					else if (b->stack[b->size] < b->stack[b->size - 1])
-					{
-						exec_swap(b, "sb");
-						print_stacks(a, b, "sb min");
-					}
-				}
-				/**********/
+			/*****************/
+			process_after_push(a, b);
+			/*****************/
 		}
 
 		// MIN at BOTTOM of stack
@@ -293,6 +328,11 @@ void	sort_5(t_stack *a, t_stack *b)
 			}
 		}
 
+		else if (a->stack[0] < a->stack[a->size] && a->stack[0] < a->average)
+		{
+			exec_rev_rotate(a, "rra");
+			print_stacks(a, b, "rra bottom");
+		}
 
 		else if (a->change_top == 1 || a->change_bottom == 1)
 		{
@@ -325,75 +365,13 @@ void	sort_5(t_stack *a, t_stack *b)
 		
 		else if (a->change_top > a->change_bottom)
 		{
-			if (a->stack[a->size] < a->average && check_sorted(a) == EXIT_FAILURE)
-			//else if (a->min_pos <= a->size / 2)
-			{
-				// exec_rev_rotate(a, "rra");
-				// print_stacks(a, b, "rra +-");
-				exec_push(a, b, "pb");
-				print_stacks(a, b, "pb ++");
-				
-				/**********/
-				if (b->size > 0)
-				{
-					if (b->stack[b->size] == b->min)
-					{
-						exec_rotate(b, "rb");
-						print_stacks(a, b, "rb +-");
-					}
-					else if (b->stack[b->size] < b->stack[b->size - 1] && a->stack[a->size] > a->stack[a->size - 1])
-					{
-						exec_swap(b, "ss");
-						print_stacks(a, b, "ss +-");
-					}
-					else if (b->stack[b->size] < b->stack[b->size - 1])
-					{
-						exec_swap(b, "sb");
-						print_stacks(a, b, "sb +-");
-					}
-				}
-				/**********/
-			}
-			else
-			{
-				exec_rotate(a, "ra");
-				print_stacks(a, b, "ra +-");
-			}
+			process_bottom_changes(a, b);
 		}
 
 
 		else if (a->change_top <= a->change_bottom)
 		{
-			if (a->stack[a->size] < a->average && check_sorted(a) == EXIT_FAILURE)
-			{
-				exec_push(a, b, "pb");
-				print_stacks(a, b, "pb -+");
-				/**********/
-				if (b->size > 0)
-				{
-					if (b->stack[b->size] == b->min)
-					{
-						exec_rotate(b, "rb");
-						print_stacks(a, b, "rb -+");
-					}
-					else if (b->stack[b->size] < b->stack[b->size - 1] && a->stack[a->size] > a->stack[a->size - 1])
-					{
-						exec_swap(b, "ss");
-						print_stacks(a, b, "ss -+");
-					}
-					else if (b->stack[b->size] < b->stack[b->size - 1])
-					{
-						exec_swap(b, "sb");
-						print_stacks(a, b, "sb -+");
-					}
-				}
-				/**********/
-			}
-			else
-			{
-				exec_rotate(a, "ra");
-				print_stacks(a, b, "ra -+");
-			}
+			process_top_changes(a, b);
 		}
 		// else if (a->change_top == a->change_bottom)
 		// {

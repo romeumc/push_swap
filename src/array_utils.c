@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 21:49:00 by rmartins          #+#    #+#             */
-/*   Updated: 2021/06/01 01:22:48 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/01 02:48:47 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,12 @@ void	update_stack(t_stack *s)
 	change_detect(s);
 	if (s->size > 2)
 	{
-		s->diff_bottom = s->stack[s->size - 1] - s->stack[0];
-		s->diff_top = s->stack[s->size - 1] - s->stack[s->size - 2];
+		s->diff_bottom = s->stack[s->size] - s->stack[0];
+		s->diff_top = s->stack[s->size] - s->stack[s->size - 1];
+		if (s->diff_bottom < 0)
+			s->diff_bottom *= -1;
+		if (s->diff_top < 0)
+			s->diff_top *= -1;
 	}
 }
 
