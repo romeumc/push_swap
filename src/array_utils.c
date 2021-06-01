@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 21:49:00 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/31 20:35:18 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/01 01:22:48 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	get_min_max_avg(t_stack *s)
 	while (i <= s->size)
 	{
 		if (s->stack[i] > s->max)
+		{
 			s->max = s->stack[i];
+			s->max_pos = i;
+		}
 		if (s->stack[i] < s->min)
 		{
 			s->min = s->stack[i];

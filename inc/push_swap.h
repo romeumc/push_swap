@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 17:22:08 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/31 16:28:43 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/01 01:22:34 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_stack
 	int		min;
 	int		min_pos;
 	int		max;
+	int		max_pos;
 	double	average;
 	int		change_top;
 	int		change_bottom;

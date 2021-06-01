@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 01:16:08 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/31 22:15:26 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/01 01:27:44 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,50 +101,80 @@ void	sort_3(t_stack *s, t_stack *b)
 }
 */
 
-void	sort_one_change_bottom(t_stack *a, t_stack *b)
-{
-	int i;
-	int count;
+// void	sort_one_change_bottom(t_stack *a, t_stack *b)
+// {
+// 	int i;
+// 	int count;
 
-	// // MIN at BOTTOM of stack
-	// if (a->min_pos == 0)
-	// {
-	// 	exec_rev_rotate(a, "rra");
-	// 	print_stacks(a, b, "rra min");
-	// }
-	// else
-	// {
-		count = a->change_bottom;
-		i = 0;
-		while (i <= count)
-		{
-			exec_rev_rotate(a, "rra");
-			i++;
-		}
-		while (i > 1)
-		{
-			exec_swap(a, "sa");
-			exec_rotate(a, "ra");
-			i--;
-		}
-		exec_rotate(a, "ra");
-	// }
-	(void)b;
-}
+// 	count = a->change_bottom;
+// 	i = 0;
+// 	while (i <= count)
+// 	{
+// 		exec_rev_rotate(a, "rra");
+// 		i++;
+// 	}
+// 	while (i > 1)
+// 	{
+// 		exec_swap(a, "sa");
+// 		exec_rotate(a, "ra");
+// 		i--;
+// 	}
+// 	exec_rotate(a, "ra");
+// 	print_stacks(a, b, "one bottom");
+// 	//(void)b;
+// }
 
 
 void	sort_top1_bottom1(t_stack *a, t_stack *b)
 {	
-	if (a->stack[a->size] > a->average)
+	if (a->change_top == 1)
 	{
-		exec_rotate(a, "ra");
-		print_stacks(a, b, "ra 11");
+		if (a->stack[a->size] > a->average && a->stack[a->size - 1] > a->average)
+		{
+			exec_rotate(a, "ra");
+			print_stacks(a, b, "ra 11");
+		}
+		else
+		{
+			exec_swap(a, "sa");
+			print_stacks(a, b, "sa 11");
+		}
 	}
-	else
+	else if (a->change_bottom == 1)
 	{
-		exec_swap(a, "sa");
-		print_stacks(a, b, "sa 11");
+		// if (a->stack[0] < a->stack[a->size])
+		// {
+		// 	exec_rev_rotate(a, "rra");
+		// 	print_stacks(a, b, "rra 11");
+		// }
+		// else
+		// {
+			exec_push(a, b, "pb");
+			print_stacks(a, b, "pb 11");
+			/**********/
+				if (b->size > 0)
+				{
+					if (b->stack[b->size] == b->min_pos)
+					{
+						exec_rotate(b, "rb");
+						print_stacks(a, b, "rb 11");
+					}
+					else if (b->stack[b->size] < b->stack[b->size - 1] && a->stack[a->size] > a->stack[a->size - 1])
+					{
+						exec_swap(a, NULL);
+						exec_swap(b, "ss");
+						print_stacks(a, b, "ss 11");
+					}
+					else if (b->stack[b->size] < b->stack[b->size - 1])
+					{
+						exec_swap(b, "sb");
+						print_stacks(a, b, "sb 11");
+					}
+				}
+				/**********/
+		//}
 	}
+
 }
 
 
@@ -155,27 +185,88 @@ void	sort_5(t_stack *a, t_stack *b)
 	sorted = EXIT_FAILURE;
 	while(sorted == EXIT_FAILURE || b->size != -1)
 	{
-		if (a->change_total == 1 && a->change_bottom < a->change_top && a->min_pos == a->size)
-		{
-			sort_one_change_bottom(a, b);
-		}
+		// if (a->change_total == 1 && a->change_bottom < a->change_top && a->min_pos == a->size)
+		// {
+		// 	sort_one_change_bottom(a, b);
+		// }
 
 		// return B >> A
-		else if (a->stack[a->size] == a->min && b->stack[b->size] == b->max
+		if (a->stack[a->size] == a->min && b->stack[b->size] == b->max
 			&& check_sorted(a) == EXIT_SUCCESS)
 		{
 			exec_push(b, a, "pa");
 			print_stacks(a, b, "pa");
+				/**********/
+				if (b->size > 0)
+				{
+					if (b->stack[b->size] == b->min)
+					{
+						exec_rotate(b, "rb");
+						print_stacks(a, b, "rb +-");
+					}
+					else if (b->stack[b->size] < b->stack[b->size - 1] && a->stack[a->size] > a->stack[a->size - 1])
+					{
+						exec_swap(a, NULL);
+						exec_swap(b, "ss");
+						print_stacks(a, b, "ss +-");
+					}
+					else if (b->stack[b->size] < b->stack[b->size - 1])
+					{
+						exec_swap(b, "sb");
+						print_stacks(a, b, "sb +-");
+					}
+				}
+				/**********/
 		}
 		// SORT 3
+		else if (check_sorted(a) == EXIT_SUCCESS)
+		{
+			if (b->max_pos > b->size / 2)
+			{
+				while (b->stack[b->size] != b->max)
+				{
+					exec_rotate(b, "rb");
+					print_stacks(a, b, "rb sorted");
+				}
+			}
+			else
+			{
+				while (b->stack[b->size] != b->max)
+				{
+					exec_rev_rotate(b, "rrb");
+					print_stacks(a, b, "rrb sorted");
+				}
+			}
+		}
+		
 		else if (a->size == 2)
 			sort_3(a, b);
 		
 		// MIN at TOP of stack
-		else if ((a->min_pos) == (a->size))
+		else if ((a->min_pos) == (a->size) && check_sorted(a) == EXIT_FAILURE)
 		{
 			exec_push(a, b, "pb");
 			print_stacks(a, b, "pb min");
+				/**********/
+				if (b->size > 0)
+				{
+					if (b->stack[b->size] == b->min)
+					{
+						exec_rotate(b, "rb");
+						print_stacks(a, b, "rb min");
+					}
+					else if (b->stack[b->size] < b->stack[b->size - 1] && a->stack[a->size] > a->stack[a->size - 1])
+					{
+						exec_swap(b, "ss");
+						print_stacks(a, b, "ss min");
+					}
+					else if (b->stack[b->size] < b->stack[b->size - 1])
+					{
+						exec_swap(b, "sb");
+						print_stacks(a, b, "sb min");
+					}
+				}
+				/**********/
 		}
 
 		// MIN at BOTTOM of stack
@@ -234,11 +325,34 @@ void	sort_5(t_stack *a, t_stack *b)
 		
 		else if (a->change_top > a->change_bottom)
 		{
-			if (a->stack[a->size] < a->average)
+			if (a->stack[a->size] < a->average && check_sorted(a) == EXIT_FAILURE)
 			//else if (a->min_pos <= a->size / 2)
 			{
-				exec_rev_rotate(a, "rra");
-				print_stacks(a, b, "rra +-");
+				// exec_rev_rotate(a, "rra");
+				// print_stacks(a, b, "rra +-");
+				exec_push(a, b, "pb");
+				print_stacks(a, b, "pb ++");
+				
+				/**********/
+				if (b->size > 0)
+				{
+					if (b->stack[b->size] == b->min)
+					{
+						exec_rotate(b, "rb");
+						print_stacks(a, b, "rb +-");
+					}
+					else if (b->stack[b->size] < b->stack[b->size - 1] && a->stack[a->size] > a->stack[a->size - 1])
+					{
+						exec_swap(b, "ss");
+						print_stacks(a, b, "ss +-");
+					}
+					else if (b->stack[b->size] < b->stack[b->size - 1])
+					{
+						exec_swap(b, "sb");
+						print_stacks(a, b, "sb +-");
+					}
+				}
+				/**********/
 			}
 			else
 			{
@@ -250,10 +364,30 @@ void	sort_5(t_stack *a, t_stack *b)
 
 		else if (a->change_top <= a->change_bottom)
 		{
-			if (a->stack[a->size] < a->average)
+			if (a->stack[a->size] < a->average && check_sorted(a) == EXIT_FAILURE)
 			{
-				exec_rev_rotate(a, "rra");
-				print_stacks(a, b, "rra -+");
+				exec_push(a, b, "pb");
+				print_stacks(a, b, "pb -+");
+				/**********/
+				if (b->size > 0)
+				{
+					if (b->stack[b->size] == b->min)
+					{
+						exec_rotate(b, "rb");
+						print_stacks(a, b, "rb -+");
+					}
+					else if (b->stack[b->size] < b->stack[b->size - 1] && a->stack[a->size] > a->stack[a->size - 1])
+					{
+						exec_swap(b, "ss");
+						print_stacks(a, b, "ss -+");
+					}
+					else if (b->stack[b->size] < b->stack[b->size - 1])
+					{
+						exec_swap(b, "sb");
+						print_stacks(a, b, "sb -+");
+					}
+				}
+				/**********/
 			}
 			else
 			{
