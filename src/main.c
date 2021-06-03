@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 16:09:12 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/31 16:24:05 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/02 16:54:49 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,19 @@ void	tests(t_stack *a, t_stack *b)
 		check_sorted(a));
 }
 
-void	do_sort(t_stack *a, t_stack *b)
+void	do_sort(t_stack *a, t_stack *b, int argc)
 {
 	// if (argc <= 4)
 	// {
 	// 	sort_3(a);
 	// }
-	// else if (argc <= 10)
-	// {
+	// else 
+	if (argc <= 10)
+	{
 		sort_5(a, b);
-	// }
-	// else
-	// 	sort_algorithm(a, b, argc);
+	}
+	else
+		sort_big(a, b);
 }
 
 void	init_stack(t_stack *s, int argc)
@@ -99,6 +100,7 @@ void	init_stack(t_stack *s, int argc)
 	s->change_top = 0;
 	s->change_bottom = 0;
 	s->change_total = 0;
+	s->max_sorted = INT_MIN;
 }
 
 int	main(int argc, char **argv)
@@ -123,7 +125,7 @@ int	main(int argc, char **argv)
 	if (check_sorted(&a) == EXIT_FAILURE)
 	{
 		print_stacks(&a, &b, "init");
-		do_sort(&a, &b);
+		do_sort(&a, &b, argc);
 	}
 	else
 	{

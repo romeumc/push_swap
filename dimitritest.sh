@@ -1,0 +1,1 @@
+ARG=`seq 1 $1 | sort -R` && ./../helper-sites/dimitri.push_swap/push_swap $ARG | ./checker -vcat $ARG

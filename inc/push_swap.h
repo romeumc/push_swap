@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 17:22:08 by rmartins          #+#    #+#             */
-/*   Updated: 2021/06/01 01:22:34 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/02 23:59:32 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../libft/libft.h"
 # include "ft_ansi.h"
 
+# define PROCESS_SIZE 11
 typedef struct s_stack
 {
 	int		*stack;
@@ -33,6 +34,8 @@ typedef struct s_stack
 	int		change_total;
 	int		diff_top;
 	int		diff_bottom;
+	int		max_sorted;
+	int		next_to_sort;
 }	t_stack;
 
 void	load_stack(int argc, char **argv, t_stack *s);
@@ -61,6 +64,7 @@ void	exec_rev_rotate(t_stack *s, char *instruction);
 
 //void	sort_3(t_stack *s);
 void	sort_5(t_stack *a, t_stack *b);
+void	sort_big(t_stack *a, t_stack *b);
 void	sort_algorithm(t_stack *a, t_stack *b, int argc);
 
 void	display_error(char *title, char *description);
