@@ -6,21 +6,26 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 21:49:00 by rmartins          #+#    #+#             */
-/*   Updated: 2021/06/02 17:51:17 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/04 13:09:52 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	get_min_max_avg(t_stack *s)
+static void	init_variables(t_stack *s)
 {
-	int	i;
-
-	i = 0;
 	s->max = INT_MIN;
 	s->min = INT_MAX;
 	s->next_to_sort = INT_MAX;
 	s->average = 0;
+}
+
+static void	get_min_max_avg(t_stack *s)
+{
+	int	i;
+
+	i = 0;
+	init_variables(s);
 	while (i <= s->size)
 	{
 		if (s->stack[i] > s->max)
@@ -43,7 +48,7 @@ void	get_min_max_avg(t_stack *s)
 	s->average /= i;
 }
 
-void	change_detect(t_stack *s)
+static void	change_detect(t_stack *s)
 {
 	int	i;
 	int	first;

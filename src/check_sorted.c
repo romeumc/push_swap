@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 01:17:59 by rmartins          #+#    #+#             */
-/*   Updated: 2021/05/31 16:23:19 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/04 11:09:28 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ void	print_sorted(t_stack *s)
 	if (check_sorted(s) == EXIT_FAILURE)
 		printf(ANSI_B_RED "FAIL" ANSI_RESET "\n\n");
 	else
-		printf(ANSI_F_GREEN "OK" ANSI_RESET "\n\n");
+		printf(ANSI_B_GREEN " OK " ANSI_RESET "\n\n");
 }

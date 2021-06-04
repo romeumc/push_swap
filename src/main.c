@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 16:09:12 by rmartins          #+#    #+#             */
-/*   Updated: 2021/06/02 16:54:49 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/04 12:00:59 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,12 @@ int	main(int argc, char **argv)
 		print_stacks(&a, &b, "init");
 		do_sort(&a, &b, argc);
 	}
-	else
-	{
-		print_stacks(&a, &b, "OKKKKKKKKK");
-		print_sorted(&a);
-	}
+	// else
+	// {
+	// 	print_stacks(&a, &b, "OKKKKKKKKK");
+	// 	print_sorted(&a);
+	// }
+	//print_sorted(&a);
 	free(a.stack);
 	free(b.stack);
 }
