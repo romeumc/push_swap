@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 01:17:59 by rmartins          #+#    #+#             */
-/*   Updated: 2021/06/04 11:09:28 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/04 15:01:22 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,14 @@
 // 	else
 // 		return (EXIT_FAILURE);
 // }
+
+int	next_to_sort(t_stack *a, t_stack *b)
+{
+	if (a->next_to_sort < b->next_to_sort)
+		return (a->next_to_sort);
+	else
+		return (b->next_to_sort);
+}
 
 int	check_sorted(t_stack *s)
 {
