@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 15:31:16 by rmartins          #+#    #+#             */
-/*   Updated: 2021/06/08 18:48:56 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/08 19:01:56 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	init_stack(t_stack *s, int argc)
 int	main(int argc, char **argv)
 {
 	int		valid_list;
-	int		result;
 	t_stack	a;
 	t_stack	b;
 
@@ -56,9 +55,9 @@ int	main(int argc, char **argv)
 		init_stack(&a, argc);
 		init_stack(&b, argc);
 		load_stack(argc, argv, &a);
-		result = load_instructions(&a, &b);
+		valid_list = load_instructions(&a, &b);
 	}
-	if (result == EXIT_FAILURE)
+	if (valid_list == EXIT_FAILURE)
 		ft_putstr_fd("Error\n", 2);
 	else if (check_sorted(&a) == EXIT_FAILURE)
 		printf("KO\n");
