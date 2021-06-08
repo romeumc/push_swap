@@ -6,53 +6,11 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 01:17:59 by rmartins          #+#    #+#             */
-/*   Updated: 2021/06/04 15:01:22 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/08 16:35:21 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// int	check_rev_sorted(t_list *list, int argc)
-// {
-// 	int	sorted;
-// 	int	size;
-
-// 	sorted = EXIT_SUCCESS;
-// 	size = ft_lstsize(list);
-// 	if (size != argc - 1)
-// 		return (EXIT_FAILURE);
-// 	while (list->next && size > 1)
-// 	{
-// 		if (ft_atoi(list->content) < ft_atoi(list->next->content))
-// 			sorted = EXIT_FAILURE;
-// 		list = list->next;
-// 	}
-// 	if (sorted == EXIT_SUCCESS)
-// 		return (EXIT_SUCCESS);
-// 	else
-// 		return (EXIT_FAILURE);
-// }
-
-// int	check_sorted(t_list *list, int argc)
-// {
-// 	int	sorted;
-// 	int	size;
-
-// 	sorted = EXIT_SUCCESS;
-// 	size = ft_lstsize(list);
-// 	if (size != argc - 1)
-// 		return (EXIT_FAILURE);
-// 	while (list->next && size > 1)
-// 	{
-// 		if (ft_atoi(list->content) > ft_atoi(list->next->content))
-// 			sorted = EXIT_FAILURE;
-// 		list = list->next;
-// 	}
-// 	if (sorted == EXIT_SUCCESS)
-// 		return (EXIT_SUCCESS);
-// 	else
-// 		return (EXIT_FAILURE);
-// }
 
 int	next_to_sort(t_stack *a, t_stack *b)
 {
