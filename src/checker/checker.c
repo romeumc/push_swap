@@ -6,7 +6,7 @@
 /*   By: rmartins <rmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 15:31:16 by rmartins          #+#    #+#             */
-/*   Updated: 2021/06/08 19:01:56 by rmartins         ###   ########.fr       */
+/*   Updated: 2021/06/19 14:37:20 by rmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int	main(int argc, char **argv)
 		load_stack(argc, argv, &a);
 		valid_list = load_instructions(&a, &b);
 	}
-	if (valid_list == EXIT_FAILURE)
-		ft_putstr_fd("Error\n", 2);
+	if (check_sorted(&a) == EXIT_SUCCESS)
+		printf("OK\n");
+	else if (valid_list == EXIT_FAILURE)
+		ft_putstr_fd("Error1\n", 2);
 	else if (check_sorted(&a) == EXIT_FAILURE)
 		printf("KO\n");
-	else
-		printf("OK\n");
 	free(a.stack);
 	free(b.stack);
 }
