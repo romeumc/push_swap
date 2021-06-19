@@ -60,7 +60,7 @@ int	main(int argc, char **argv)
 	if (check_sorted(&a) == EXIT_SUCCESS)
 		printf("OK\n");
 	else if (valid_list == EXIT_FAILURE)
-		ft_putstr_fd("Error1\n", 2);
+		ft_putstr_fd("Error\n", 2);
 	else if (check_sorted(&a) == EXIT_FAILURE)
 		printf("KO\n");
 	free(a.stack);
